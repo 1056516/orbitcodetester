@@ -248,10 +248,11 @@
             const newContent = prompt(`Update content for ${fileToUpdate.name}:`, fileToUpdate.content);
             if (newContent !== null) {
               fileToUpdate.content = newContent;
+              alert('Updated!');
               updateFilesList();
             }
           } else {
-            alert(`File ${path} not found.`);
+            alert('Error: File not found.');
           }
         } else {
           const folderFiles = files.filter(file => file.name.startsWith(folderPath) && file.name !== folderPath);
@@ -261,10 +262,11 @@
               folderFiles.forEach(file => {
                 file.content = newContent;
               });
+              alert('Updated!');
               updateFilesList();
             }
           } else {
-            alert(`No files found in folder ${folderPath}.`);
+            alert('Error: No files found in folder.');
           }
         }
       }
