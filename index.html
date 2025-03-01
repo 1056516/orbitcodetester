@@ -238,11 +238,12 @@
       const path = prompt('Enter the directory or file path (e.g., /foldername or /foldername/filename.html):');
       
       if (path) {
-        const fileName = path.split('/').pop();
-        const folderPath = path.substring(0, path.lastIndexOf('/'));
-        
+        const parts = path.split('/');
+        const fileName = parts.pop();
+        const folderPath = parts.join('/');
+
         if (fileName) {
-          const fileToUpdate = files.find(file => file.name === fileName);
+          const fileToUpdate = files.find(file => file.name === path);
           if (fileToUpdate) {
             const newContent = prompt(`Update content for ${fileToUpdate.name}:`, fileToUpdate.content);
             if (newContent !== null) {
@@ -250,10 +251,10 @@
               updateFilesList();
             }
           } else {
-            alert(`File ${fileName} not found.`);
+            alert(`File ${path} not found.`);
           }
         } else {
-          const folderFiles = files.filter(file => file.name.startsWith(folderPath));
+          const folderFiles = files.filter(file => file.name.startsWith(folderPath) && file.name !== folderPath);
           if (folderFiles.length > 0) {
             const newContent = prompt(`Update content for all files in ${folderPath}:`);
             if (newContent !== null) {
